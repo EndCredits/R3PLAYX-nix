@@ -9,5 +9,5 @@
 { pkgs ? import <nixpkgs> { } }:
 
 {
-  r3playx-package = pkgs.callPackage ./pkgs/r3playx {};
+  r3playx = pkgs.callPackage ./pkgs/r3playx {};
 }
