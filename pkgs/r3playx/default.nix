@@ -5,6 +5,7 @@
 , dpkg
 , expat
 , autoPatchelfHook
+, commandLineArgs ? ""
 , wrapGAppsHook
 , makeWrapper
 , alsa-lib
@@ -137,5 +138,12 @@ else stdenv.mkDerivation {
     patchelf --add-needed libGL.so.1 $out/opt/R3PLAYX/desktop
 
     runHook postInstall
+  '';
+  
+  preFixup = ''
+    gappsWrapperArgs+=(
+      --add-flags "\''${NIXOS_OZONE_WL:+\''${WAYLAND_DISPLAY:+--ozone-platform-hint=auto --enable-features=WaylandWindowDecorations}}"
+      --add-flags ${lib.escapeShellArg commandLineArgs}
+    )
   '';
 }
