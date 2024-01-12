@@ -18,6 +18,8 @@
 , xorg
 , xdg-utils
 , libdrm
+, libGL
+, libglvnd
 , libnotify
 , libsecret
 , libuuid
@@ -64,6 +66,8 @@ let
     xorg.libXtst
     xdg-utils
     libdrm
+    libGL
+    libglvnd
     libnotify
     libsecret
     libuuid
@@ -128,6 +132,9 @@ else stdenv.mkDerivation {
     # patch r3playx binary
     interpreter="$(cat $NIX_BINTOOLS/nix-support/dynamic-linker)"
     patchelf --set-interpreter $interpreter $out/opt/R3PLAYX/desktop
+
+    ln -s $(libGL)/lib/libGL.so.1 $out/opt/R3PLAYX/libGL.so.1
+    patchelf --add-needed libGL.so.1 $out/opt/R3PLAYX/desktop
 
     runHook postInstall
   '';
