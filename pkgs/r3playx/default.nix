@@ -114,9 +114,9 @@ else stdenv.mkDerivation {
     mkdir -p $out/bin
     cp -r opt $out/opt
     cp -r usr/share $out/share
-    substituteInPlace $out/share/applications/desktop.desktop \
-      --replace "/opt/R3PLAYX/desktop" "$out/bin/desktop"
-    makeWrapper $out/opt/R3PLAYX/desktop $out/bin/desktop \
+    substituteInPlace $out/share/applications/r3playx.desktop \
+      --replace "/opt/R3PLAYX/desktop" "$out/bin/r3playx"
+    makeWrapper $out/opt/R3PLAYX/desktop $out/bin/r3playx \
       --argv0 "r3playx" \
       --add-flags "$out/opt/R3PLAYX/resources/app.asar"
 
