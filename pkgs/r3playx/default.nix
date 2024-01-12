@@ -32,9 +32,13 @@ let
 
   srcs = {
     x86_64-linux = fetchurl {
-      url = "https://github.com/EndCredits/music/releases/download/2.7.2/R3PLAYX-2.7.2-linux.deb";
-      hash = "sha256-e/ZdaaQDVvJOgQ3Sv3qihfO+uh6zLe1d4dYERVtq2No=";
+      url = "https://github.com/EndCredits/music/releases/download/${version}/R3PLAYX-${version}-linux-amd64.deb";
+      hash = "sha256-rsu7pDNh2IxqchEvYMS6p+j7cbIg3UPcHm2KSBjmK3Y=";
     };
+    aarch64-linux = fetchurl {
+      url = "https://github.com/EndCredits/music/releases/download/${version}/R3PLAYX-${version}-linux-arm64.deb";
+      hash = "sha256-6Xw2gm6u/BZuepGqBxD6dXO9haZ9wqs3kqLc6u2dFNg=";
+    }
     x86_64-darwin = fetchurl {
       url = "https://github.com/Sherlockouo/music/releases/download/${version}/R3PLAYX-${version}-mac-x64.dmg";
       hash = "sha256-z8CASZRWKlj1g3mhxTMMeR4klTvQ2ReSrL7Rt18qQbM=";
