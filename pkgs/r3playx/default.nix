@@ -121,6 +121,10 @@ else stdenv.mkDerivation {
       --argv0 "r3playx" \
       --add-flags "$out/opt/R3PLAYX/resources/app.asar"
 
+    # patch r3playx binary
+    interpreter="$(cat $NIX_BINTOOLS/nix-support/dynamic-linker)"
+    patchelf --set-interpreter $interpreter $out/opt/R3PLAYX/desktop
+
     runHook postInstall
   '';
 }
