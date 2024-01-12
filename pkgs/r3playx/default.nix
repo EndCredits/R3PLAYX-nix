@@ -33,7 +33,7 @@ let
   srcs = {
     x86_64-linux = fetchurl {
       url = "https://github.com/EndCredits/music/releases/download/${version}/R3PLAYX-${version}-linux-amd64.deb";
-      hash = "sha256-rsu7pDNh2IxqchEvYMS6p+j7cbIg3UPcHm2KSBjmK3Y=";
+      hash = "sha256-ul7UyVoKhNBwHMY5+rpms3H3OCD9gPd8Po/6On2BNJ8=";
     };
     aarch64-linux = fetchurl {
       url = "https://github.com/EndCredits/music/releases/download/${version}/R3PLAYX-${version}-linux-arm64.deb";
