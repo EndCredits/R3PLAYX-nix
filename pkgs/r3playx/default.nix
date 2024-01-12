@@ -38,7 +38,7 @@ let
     aarch64-linux = fetchurl {
       url = "https://github.com/EndCredits/music/releases/download/${version}/R3PLAYX-${version}-linux-arm64.deb";
       hash = "sha256-6Xw2gm6u/BZuepGqBxD6dXO9haZ9wqs3kqLc6u2dFNg=";
-    }
+    };
     x86_64-darwin = fetchurl {
       url = "https://github.com/Sherlockouo/music/releases/download/${version}/R3PLAYX-${version}-mac-x64.dmg";
       hash = "sha256-z8CASZRWKlj1g3mhxTMMeR4klTvQ2ReSrL7Rt18qQbM=";
