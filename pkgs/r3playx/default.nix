@@ -114,6 +114,7 @@ else stdenv.mkDerivation {
     mkdir -p $out/bin
     cp -r opt $out/opt
     cp -r usr/share $out/share
+    mv $out/share/applications/desktop.desktop $out/share/applications/r3playx.desktop
     substituteInPlace $out/share/applications/r3playx.desktop \
       --replace "/opt/R3PLAYX/desktop" "$out/bin/r3playx"
     makeWrapper $out/opt/R3PLAYX/desktop $out/bin/r3playx \
