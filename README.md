@@ -1,39 +1,83 @@
-# nur-packages-template
-
-**A template for [NUR](https://github.com/nix-community/NUR) repositories**
-
-## Setup
-
-1. Click on [Use this template](https://github.com/nix-community/nur-packages-template/generate) to start a repo based on this template. (Do _not_ fork it.)
-2. Add your packages to the [pkgs](./pkgs) directory and to
-   [default.nix](./default.nix)
-   * Remember to mark the broken packages as `broken = true;` in the `meta`
-     attribute, or travis (and consequently caching) will fail!
-   * Library functions, modules and overlays go in the respective directories
-3. Choose your CI: Depending on your preference you can use github actions (recommended) or [Travis ci](https://travis-ci.com).
-   - Github actions: Change your NUR repo name and optionally add a cachix name in [.github/workflows/build.yml](./.github/workflows/build.yml) and change the cron timer
-     to a random value as described in the file
-   - Travis ci: Change your NUR repo name and optionally your cachix repo name in 
-   [.travis.yml](./.travis.yml). Than enable travis in your repo. You can add a cron job in the repository settings on travis to keep your cachix cache fresh
-5. Change your travis and cachix names on the README template section and delete
-   the rest
-6. [Add yourself to NUR](https://github.com/nix-community/NUR#how-to-add-your-own-repository)
-
-## README template
-
 # R3PLAYX-nix
 
-## Bring R3PALYX to NixOS
-
-**My personal [NUR](https://github.com/nix-community/NUR) repository**
+Bring R3PALYX to NixOS
 
 <!-- Remove this if you don't use github actions -->
 ![Build and populate cache](https://github.com/EndCredits/R3PLAYX-nix/workflows/Build%20and%20populate%20cache/badge.svg)
 
-<!--
-Uncomment this if you use travis:
+## How to use
 
-[![Build Status](https://travis-ci.com/<YOUR_TRAVIS_USERNAME>/nur-packages.svg?branch=master)](https://travis-ci.com/<YOUR_TRAVIS_USERNAME>/nur-packages)
--->
-[![Cachix Cache](https://img.shields.io/badge/cachix-<YOUR_CACHIX_CACHE_NAME>-blue.svg)](https://<YOUR_CACHIX_CACHE_NAME>.cachix.org)
+Note: You'll need nix flake taking over your system management. If you're still using legacy way to describe your nixos build, please refer to link below to integrate your system management with flake.
 
+en\_US: [Enabling NixOS with Flakes - NixOS & Flakes Book](https://nixos-and-flakes.thiscute.world/nixos-with-flakes/nixos-with-flakes-enabled)
+
+zh\_CN: [使用 Flakes 来管理你的 NixOS - NixOS 与 Flakes](https://nixos-and-flakes.thiscute.world/zh/nixos-with-flakes/nixos-with-flakes-enabled)
+
+1. Add this repository in your flakes inputs and pass input as special args to your submodules
+
+```diff
+/etc/nixos/flake.nix
+  {
+    description = "EndCredits's NixOS Flake";
+    nixConfig = {};
+    inputs = {
+      nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+++    r3playx.url = "github:EndCredits/R3PLAYX-nix/master";
+    };
+
+    outputs = { self, nixpkgs, ... }@inputs: {
+      nixosConfigurations = {
+        "crepuscular-nixos" = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+++        specialArgs = inputs;
+          modules = [
+            ./configuration.nix
+          ];
+        };
+      };
+    };
+  }
+```
+
+2. Add ```r3playx``` as a input parameter to your configuration and build r3playx package.
+
+```diff
+/etc/nixos/configuration.nix (or anywhere you define your system package)
+
+--  { config, pkgs, ... }:
+++  { config, pkgs, r3playx, ... }:
+
+    {
+      imports =
+        [ # Include the results of the hardware scan.
+          ./hardware-configuration.nix
+          ./configs/configs.nix
+        ];
+
+    ......
+
+    environment.systemPackages = with pkgs; [
+        ......
+++      r3playx.packages."${pkgs.system}".r3playx
+    ]
+
+    ......
+
+    }
+```
+
+3. Update your flake lock
+
+In ```/etc/nixos```
+
+```bash
+sudo nix flake update
+```
+
+4. Rebuild your NixOS
+
+In ```/etc/nixos/```
+
+```bash
+sudo nixos-rebuild switch --flake ./
+```
