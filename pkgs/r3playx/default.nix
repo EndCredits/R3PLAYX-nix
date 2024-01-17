@@ -31,15 +31,15 @@
 }:
 let
   pname = "r3playx";
-  version = "2.7.2";
+  version = "2.7.3";
 
   srcs = {
     x86_64-linux = fetchurl {
-      url = "https://github.com/EndCredits/music/releases/download/${version}/R3PLAYX-${version}-linux-amd64.deb";
+      url = "https://github.com/Sherlockouo/music/releases/download/${version}/R3PLAYX-${version}-linux-amd64.deb";
       hash = "sha256-ul7UyVoKhNBwHMY5+rpms3H3OCD9gPd8Po/6On2BNJ8=";
     };
     aarch64-linux = fetchurl {
-      url = "https://github.com/EndCredits/music/releases/download/${version}/R3PLAYX-${version}-linux-arm64.deb";
+      url = "https://github.com/Sherlockouo/music/releases/download/${version}/R3PLAYX-${version}-linux-arm64.deb";
       hash = "sha256-6Xw2gm6u/BZuepGqBxD6dXO9haZ9wqs3kqLc6u2dFNg=";
     };
     x86_64-darwin = fetchurl {
