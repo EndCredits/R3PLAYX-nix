@@ -135,7 +135,7 @@ else stdenv.mkDerivation {
     patchelf --set-interpreter $interpreter $out/opt/R3PLAYX/desktop
 
     ln -s $(libGL)/lib/libGL.so.1 $out/opt/R3PLAYX/libGL.so.1
-    ln -s $(libGL)/lib/libEGL.so.1 $out/opt/R3PLAYX/libEGL.so.1
+    ln -s $out/opt/R3PLAYX/libEGL.so $out/opt/R3PLAYX/libEGL.so.1
     patchelf --add-needed libGL.so.1 $out/opt/R3PLAYX/desktop
 
     runHook postInstall
