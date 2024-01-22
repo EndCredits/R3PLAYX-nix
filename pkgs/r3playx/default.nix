@@ -33,6 +33,8 @@ let
   pname = "r3playx";
   version = "2.7.3";
 
+  inherit (lib) escapeShellArg;
+
   srcs = {
     x86_64-linux = fetchurl {
       url = "https://github.com/Sherlockouo/music/releases/download/${version}/R3PLAYX-${version}-linux-amd64.deb";
