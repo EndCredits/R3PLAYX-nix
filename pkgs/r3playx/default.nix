@@ -31,26 +31,26 @@
 }:
 let
   pname = "r3playx";
-  version = "2.7.3";
+  version = "2.7.4";
 
   inherit (lib) escapeShellArg;
 
   srcs = {
     x86_64-linux = fetchurl {
       url = "https://github.com/Sherlockouo/music/releases/download/${version}/R3PLAYX-${version}-linux-amd64.deb";
-      hash = "sha256-FoBd4BXIFkp6Etct7W/dQpdrKNfxPxIVv2lAgq4xE6w=";
+      hash = "sha256-LQOPFspu+Sfbz1LKo8Iw186DCoemK6gO1AWqaC2fCdE=";
     };
     aarch64-linux = fetchurl {
       url = "https://github.com/Sherlockouo/music/releases/download/${version}/R3PLAYX-${version}-linux-arm64.deb";
-      hash = "sha256-gHnL3iV4pfdVsS8dX4UmUMqatpLM/s9OmQnAn2/awKc=";
+      hash = "sha256-gcLu8zX6FEEHjyjEB+oHVXegMRjnCmWiT+Vl7c94wpI=";
     };
     x86_64-darwin = fetchurl {
       url = "https://github.com/Sherlockouo/music/releases/download/${version}/R3PLAYX-${version}-mac-x64.dmg";
-      hash = "sha256-Jx8zepwjnYIGGPjnQ5KD4w+Zz/PNH6VU1H9xq5cYD2U=";
+      hash = "sha256-wnt+m5wqQ1tvZEMVDRsf2GNHgt3+pUb2vamwVJa5vOs=";
     };
     aarch64-darwin = fetchurl {
       url = "https://github.com/Sherlockouo/music/releases/download/${version}/R3PLAYX-${version}-mac-arm64.dmg";
-      hash = "sha256-IsDxgD/qIsqswDRfFzftBwZ6DqALZqUe6mga8JqPBF4=";
+      hash = "sha256-gr2gFpolFUjj3k4Whtseq1nIubbWdbucmkhE43pEw6Y=";
     };
   };
   src = srcs.${stdenv.hostPlatform.system} or (throw "Unsupported system: ${stdenv.hostPlatform.system}");
