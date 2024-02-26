@@ -146,6 +146,7 @@ else stdenv.mkDerivation {
   
   preFixup = ''
     gappsWrapperArgs+=(
+      --prefix LD_LIBRARY_PATH : "${lib.makeLibraryPath [ libGL ]}"
       --add-flags "\''${NIXOS_OZONE_WL:+\''${WAYLAND_DISPLAY:+--ozone-platform-hint=auto --enable-features=WaylandWindowDecorations}}"
       --add-flags ${lib.escapeShellArg commandLineArgs}
     )
