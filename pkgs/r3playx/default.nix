@@ -136,9 +136,7 @@ else stdenv.mkDerivation {
     interpreter="$(cat $NIX_BINTOOLS/nix-support/dynamic-linker)"
     patchelf --set-interpreter $interpreter $out/opt/R3PLAYX/desktop
 
-    ln -s $(libGL)/lib/libGL.so.1 $out/opt/R3PLAYX/libGL.so.1
     ln -s $out/opt/R3PLAYX/libEGL.so $out/opt/R3PLAYX/libEGL.so.1
-    patchelf --add-needed libGL.so.1 $out/opt/R3PLAYX/desktop
     patchelf --add-needed libEGL.so.1 $out/opt/R3PLAYX/desktop
 
     runHook postInstall
